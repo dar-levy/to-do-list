@@ -1,5 +1,7 @@
+import "./DeleteButton.css"
+
 function DeleteButton() {
-    return <button>x</button>
+    return <button className="delete-button">x</button>
 }
 
 export default DeleteButton
