@@ -2,12 +2,15 @@ import ToDoItem from "./to-do/ToDoItem.tsx";
 
 function ToDos() {
   const items = ["Buy milk", "Watch Equaliser 3", "Prepare to the exam"];
-  const message = items.length == 0 ? <h1>There are no items</h1> : null;
+  const getMessage = () => {
+    return items.length == 0 && <h1>There are no items</h1>;
+  };
+
   return (
     <ul>
-      {message}
+      {getMessage()}
       {items.map((item) => (
-        <ToDoItem text={item} />
+        <ToDoItem key={item} text={item} />
       ))}
     </ul>
   );
