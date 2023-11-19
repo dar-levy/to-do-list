@@ -1,9 +1,18 @@
 import "./DeleteButton.css";
 
-function DeleteButton() {
+interface Props {
+  onDelete: (heading: string) => void;
+  heading: string;
+}
+
+function DeleteButton({ onDelete, heading }: Props) {
   return (
     <>
-      <button type="button" className="btn btn-danger btn-lg">
+      <button
+        onClick={() => onDelete(heading)}
+        type="button"
+        className="btn btn-danger btn-lg"
+      >
         <i className="bi bi-trash" />
       </button>
     </>

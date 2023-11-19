@@ -1,16 +1,26 @@
 import ToDoItem from "./to-do/ToDoItem.tsx";
+import { useState } from "react";
 
 function ToDos() {
-  const items = ["Buy milk", "Watch Equaliser 3", "Prepare to the exam"];
-  const getMessage = () => {
-    return items.length == 0 && <h1>There are no items</h1>;
+  const [toDos, setToDos] = useState([
+    "Buy milk",
+    "Watch Equaliser 3",
+    "Prepare to the exam",
+  ]);
+
+  const onDelete = (item: string) => {
+    setToDos(toDos.filter((toDo) => toDo != item));
+  };
+
+  const isToDosEmpty = () => {
+    return toDos.length == 0 && <h1>There are no items</h1>;
   };
 
   return (
     <ul>
-      {getMessage()}
-      {items.map((item) => (
-        <ToDoItem key={item} heading={item} />
+      {isToDosEmpty()}
+      {toDos.map((toDo) => (
+        <ToDoItem key={toDo} heading={toDo} onDelete={onDelete} />
       ))}
     </ul>
   );

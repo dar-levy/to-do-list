@@ -3,13 +3,14 @@ import "./ToDoItem.css";
 
 interface Props {
   heading: string;
+  onDelete: (heading: string) => void;
 }
 
-function ToDoItem({ heading }: Props) {
+function ToDoItem({ heading, onDelete }: Props) {
   return (
     <li className="to-do-item">
       <p>{heading}</p>
-      <DeleteButton />
+      <DeleteButton onDelete={onDelete} heading={heading} />
     </li>
   );
 }
