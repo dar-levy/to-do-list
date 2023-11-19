@@ -7,15 +7,9 @@ interface Props {
 
 function DeleteButton({ onDelete, heading }: Props) {
   return (
-    <>
-      <button
-        onClick={() => onDelete(heading)}
-        type="button"
-        className="btn btn-danger btn-lg"
-      >
-        <i className="bi bi-trash" />
-      </button>
-    </>
+    <span onClick={() => onDelete(heading)} className="close">
+      <i className="bi bi-trash" />
+    </span>
   );
 }
 
