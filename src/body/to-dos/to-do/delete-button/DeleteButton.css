@@ -1,6 +1,7 @@
 .delete-button {
     background-color: #f44336;
     border: none;
+    margin: 0;
     height: 100%;
 }
 

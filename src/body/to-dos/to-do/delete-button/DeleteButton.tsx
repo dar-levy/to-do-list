@@ -1,7 +1,7 @@
-import "./DeleteButton.css"
+import "./DeleteButton.css";
 
 function DeleteButton() {
-    return <button className="delete-button">x</button>
+  return <button className="delete-button">x</button>;
 }
 
-export default DeleteButton
+export default DeleteButton;
