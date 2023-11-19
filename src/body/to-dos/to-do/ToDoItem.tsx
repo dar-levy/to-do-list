@@ -1,10 +1,10 @@
 import DeleteButton from "./delete-button/DeleteButton.tsx";
 import "./ToDoItem.css";
 
-function ToDoItem() {
+function ToDoItem({ text }) {
   return (
     <li className="to-do-item">
-      <p>Buy milk</p>
+      <p>{text}</p>
       <DeleteButton />
     </li>
   );
