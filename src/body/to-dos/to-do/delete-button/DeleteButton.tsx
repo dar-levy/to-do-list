@@ -1,7 +1,13 @@
 import "./DeleteButton.css";
 
 function DeleteButton() {
-  return <button className="delete-button">x</button>;
+  return (
+    <>
+      <button type="button" className="btn btn-danger btn-lg">
+        <i className="bi bi-trash" />
+      </button>
+    </>
+  );
 }
 
 export default DeleteButton;
