@@ -1,10 +1,14 @@
 import DeleteButton from "./delete-button/DeleteButton.tsx";
 import "./ToDoItem.css";
 
-function ToDoItem({ text }) {
+interface Props {
+  heading: string;
+}
+
+function ToDoItem({ heading }: Props) {
   return (
     <li className="to-do-item">
-      <p>{text}</p>
+      <p>{heading}</p>
       <DeleteButton />
     </li>
   );

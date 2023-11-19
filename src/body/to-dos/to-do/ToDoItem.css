@@ -3,3 +3,8 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.to-do-item:checked {
+    text-decoration: line-through;
+    color: red;
+}

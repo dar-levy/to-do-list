@@ -10,7 +10,7 @@ function ToDos() {
     <ul>
       {getMessage()}
       {items.map((item) => (
-        <ToDoItem key={item} text={item} />
+        <ToDoItem key={item} heading={item} />
       ))}
     </ul>
   );
