@@ -1,5 +1,6 @@
 import DeleteButton from "./delete-button/DeleteButton.tsx";
 import "./ToDoItem.css";
+import { useState } from "react";
 
 interface Props {
   heading: string;
@@ -7,8 +8,13 @@ interface Props {
 }
 
 function ToDoItem({ heading, onDelete }: Props) {
+  const [isChecked, setIsChecked] = useState(false);
+  const onCheck = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
-    <li className="to-do-item">
+    <li onClick={onCheck} className={isChecked ? "checked" : ""}>
       <p>{heading}</p>
       <DeleteButton onDelete={onDelete} heading={heading} />
     </li>

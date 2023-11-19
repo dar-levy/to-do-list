@@ -20,6 +20,9 @@ ul {
 
 /* Style the list items */
 ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   padding: 12px 8px 12px 40px;
   background: #eee;
