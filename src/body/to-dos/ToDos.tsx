@@ -1,17 +1,12 @@
 import ToDoItem from "./to-do/ToDoItem.tsx";
 import { useState } from "react";
 
-function ToDos() {
-  const [toDos, setToDos] = useState([
-    "Buy milk",
-    "Watch Equaliser 3",
-    "Prepare to the exam",
-  ]);
+interface Props {
+  toDos: string[];
+  onDelete: (toDo: string) => void;
+}
 
-  const onDelete = (item: string) => {
-    setToDos(toDos.filter((toDo) => toDo != item));
-  };
-
+function ToDos({ toDos, onDelete }: Props) {
   const isToDosEmpty = () => {
     return toDos.length == 0 && <h1>There are no items</h1>;
   };

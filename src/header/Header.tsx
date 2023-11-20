@@ -1,9 +1,17 @@
-import "./Header.css"
+import "./Header.css";
+import ToDoGenerator from "./to-do-generator/ToDoGenerator.tsx";
 
-function Header() {
-    return <div className="header">
-        <h1>To-Do List</h1>
-    </div>
+interface Props {
+  onAdd: (toDo: string) => void;
 }
 
-export default Header
+function Header({ onAdd }: Props) {
+  return (
+    <div id="myDiv" className="header">
+      <h1>To-Do List</h1>
+      <ToDoGenerator onAdd={onAdd} />
+    </div>
+  );
+}
+
+export default Header;
