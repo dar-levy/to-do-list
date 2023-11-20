@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ToDoGenerator = ({ onAdd }: Props) => {
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
     if (inputRef.current != null && inputRef.current.value.length != 0) {
