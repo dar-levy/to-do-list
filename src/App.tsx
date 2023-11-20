@@ -5,9 +5,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
+  const onAdd = (toDo: string) => {};
   return (
     <>
-      <Header />
+      <Header onAdd={onAdd} />
       <ToDos />
     </>
   );
