@@ -11,6 +11,7 @@ const ToDoGenerator = ({ onAdd }: Props) => {
   const handleClick = () => {
     if (inputRef.current != null && inputRef.current.value.length != 0) {
       onAdd(inputRef.current.value);
+      inputRef.current.value = "";
     }
   };
 
