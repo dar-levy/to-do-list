@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
+import {CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {NgClass} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-to-dos',
+  selector: 'to-dos',
   standalone: true,
   imports: [
     CdkDropList,

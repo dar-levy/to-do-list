@@ -6,7 +6,7 @@ import {ToDosComponent} from "./to-dos/to-dos.component";
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   standalone: true,
   imports: [
     ToDosComponent
