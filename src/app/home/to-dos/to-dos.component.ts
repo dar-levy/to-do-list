@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from "@angular/cdk/drag-drop";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Store, select } from '@ngrx/store';
 import {EDIT_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
@@ -17,7 +17,8 @@ import {IAppState} from "../store";
     FormsModule,
     NgIf,
     NgForOf,
-    CdkDrag
+    CdkDrag,
+    AsyncPipe
   ],
   templateUrl: './to-dos.component.html',
   styleUrls: ['./to-dos.component.css']

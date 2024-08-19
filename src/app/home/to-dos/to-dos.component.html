@@ -8,14 +8,14 @@
   </tr>
   </thead>
   <tbody cdkDropList (cdkDropListDropped)="drop($event)">
-  <tr *ngIf="todos.length === 0">
+  <tr *ngIf="(todos$ | async)?.length === 0">
     <td colspan="4" class="text-center"><p>No to dos!</p></td>
   </tr>
-  <tr *ngFor="let todo of todos; index as i" cdkDrag>
+  <tr *ngFor="let todo of (todos$ | async); index as i" cdkDrag>
     <th scope="row">{{ i + 1 }}</th>
     <td [ngClass]="{'strikethrough': todo.isComplete}">
       <ng-container *ngIf="!todo.isEditing; else editTemplate">
-        <span [ngClass]="{'completed': todo.completed}">{{ todo.description }}</span>
+        <span [ngClass]="{'completed': todo.isComplete}">{{ todo.description }}</span>
       </ng-container>
       <ng-template #editTemplate>
         <input [(ngModel)]="todo.description" (keydown.enter)="editTodo(todo)" />
