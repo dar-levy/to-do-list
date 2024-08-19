@@ -32,15 +32,24 @@ export class ToDosComponent {
 
   toggleTodo(todoId: string): void {
     this.store.dispatch(TOGGLE_TODO({ id: todoId }));
+    this.updateLocalStorage();
   }
 
   removeTodo(todoId: string): void {
     this.store.dispatch(REMOVE_TODO({ id: todoId }));
+    this.updateLocalStorage();
   }
 
   editTodo(todo: ToDo): void {
     todo.isEditing = !todo.isEditing;
     this.store.dispatch(EDIT_TODO({ id: todo.id, description: todo.description }));
+    this.updateLocalStorage();
+  }
+
+  private updateLocalStorage(): void {
+    this.todos$.subscribe(todos => {
+      localStorage.setItem('tasks', JSON.stringify(todos));
+    }).unsubscribe();
   }
 
   drop(event: CdkDragDrop<ToDo[]>): void {
