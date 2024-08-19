@@ -1,5 +1,5 @@
 import { tassign } from 'tassign';
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO } from './actions';
+import {ADD_TODO, TOGGLE_TODO, REMOVE_TODO, EDIT_TODO} from './actions';
 import {Task} from "../models/task";
 import {v4 as uuidv4} from "uuid";
 
@@ -35,6 +35,19 @@ export function rootReducer(state: IAppState, action: any): IAppState {
         todos: [
           ...state.todos.slice(0, index),
           tassign(todo, { isComplete: !todo.isComplete }),
+          ...state.todos.slice(index + 1),
+        ],
+      });
+
+    case EDIT_TODO:
+      var todo = state.todos.find(t => t.id === action.id);
+
+      var index = state.todos.indexOf(todo);
+
+      return tassign(state, {
+        todos: [
+          ...state.todos.slice(0, index),
+          tassign(todo, { description: action.description }),
           ...state.todos.slice(index + 1),
         ],
       });
