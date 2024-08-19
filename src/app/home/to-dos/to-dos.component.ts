@@ -4,7 +4,7 @@ import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Store, select } from '@ngrx/store';
 import {EDIT_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
-import { Task } from '../../models/task';
+import { ToDo } from '../../models/to-do';
 import { Observable } from 'rxjs';
 import {IAppState} from "../store";
 
@@ -24,7 +24,7 @@ import {IAppState} from "../store";
   styleUrls: ['./to-dos.component.css']
 })
 export class ToDosComponent {
-  todos$: Observable<Task[]>;
+  todos$: Observable<ToDo[]>;
 
   constructor(private store: Store<IAppState>) {
     this.todos$ = this.store.pipe(select((state: IAppState) => state.todos));
@@ -38,12 +38,12 @@ export class ToDosComponent {
     this.store.dispatch(REMOVE_TODO({ id: todoId }));
   }
 
-  editTodo(todo: Task): void {
+  editTodo(todo: ToDo): void {
     todo.isEditing = !todo.isEditing;
     this.store.dispatch(EDIT_TODO({ id: todo.id, description: todo.description }));
   }
 
-  drop(event: CdkDragDrop<Task[]>): void {
+  drop(event: CdkDragDrop<ToDo[]>): void {
     this.todos$.subscribe(todos => {
       const updatedTodos = [...todos];
       moveItemInArray(updatedTodos, event.previousIndex, event.currentIndex);

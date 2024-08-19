@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-import { Task } from '../models/task';
+import { ToDo } from '../models/to-do';
 import {NotificationService} from "../services/notification.service";
 import {ToDosComponent} from "./to-dos/to-dos.component";
 import {ToDoGeneratorComponent} from "./to-do-generator/to-do-generator.component";
@@ -17,7 +17,7 @@ import {ToDoGeneratorComponent} from "./to-do-generator/to-do-generator.componen
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  tasks: Task[] = [];
+  tasks: ToDo[] = [];
   newDescription: string = '';
 
   constructor(private notificationService: NotificationService) {
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   addTask(newDescription: string) : void {
     if (newDescription.trim().length) {
-      let newTask: Task = {
+      let newTask: ToDo = {
         id: uuidv4(),
         description: newDescription,
         created_at: Date.now(),
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleTask(id: string) : void {
-    let task: Task | undefined = this.tasks.find(task => task.id == id);
+    let task: ToDo | undefined = this.tasks.find(task => task.id == id);
     if (task) {
       task.isComplete = !task.isComplete;
       this.tasks = this.tasks.filter(t => t.id !== id);
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit {
   }
 
   editTask(id: string) : void {
-    let task: Task | undefined = this.tasks.find(task => task.id == id);
+    let task: ToDo | undefined = this.tasks.find(task => task.id == id);
     if (task) {
       task.isEditing = !task.isEditing;
     }
