@@ -10,4 +10,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class ToDoGeneratorComponent {
   @Input() newDescription: string = '';
   @Output() addTask = new EventEmitter<string>();
+
+  onAddTask() {
+    this.addTask.emit(this.newDescription);
+    this.newDescription = ''
+  }
 }
