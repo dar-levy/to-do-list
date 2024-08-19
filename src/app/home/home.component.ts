@@ -37,4 +37,17 @@ export class HomeComponent implements OnInit {
       // TODO: this.notificationService.alert("Task description cannot be empty.");
     }
   }
+
+  deleteTask(id: string) : void {
+    const originalLength = this.tasks.length;
+    this.tasks = this.tasks.filter(task => task.id !== id);
+
+    if (this.tasks.length < originalLength) {
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      // TODO: this.notificationService.success("Task deleted successfully!");
+    } else {
+      // TODO: this.notificationService.alert("Failed to delete task.");
+    }
+  }
+
 }
