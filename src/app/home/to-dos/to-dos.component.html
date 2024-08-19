@@ -11,7 +11,7 @@
   <tr *ngIf="(todos$ | async)?.length === 0">
     <td colspan="4" class="text-center"><p>No to dos!</p></td>
   </tr>
-  <tr *ngFor="let todo of (todos$ | async); index as i" cdkDrag>
+  <tr *ngFor="let todo of todos$ | async; index as i" cdkDrag>
     <th scope="row">{{ i + 1 }}</th>
     <td [ngClass]="{'strikethrough': todo.isComplete}">
       <ng-container *ngIf="!todo.isEditing; else editTemplate">

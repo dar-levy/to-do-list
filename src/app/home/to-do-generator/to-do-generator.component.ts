@@ -3,7 +3,7 @@ import { FormsModule } from "@angular/forms";
 import {select, Store} from '@ngrx/store';
 import { ADD_TODO } from "../actions";
 import {IAppState} from "../../app.state";
-import {Observable} from "rxjs";
+import {concatWith, Observable} from "rxjs";
 import {ToDo} from "../../models/to-do";
 
 @Component({
@@ -31,8 +31,8 @@ export class ToDoGeneratorComponent {
   }
 
   private updateLocalStorage(): void {
-    this.todos$.subscribe(todos => {
-      localStorage.setItem('tasks', JSON.stringify(todos));
+    this.todos$.subscribe(state => {
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     }).unsubscribe();
   }
 }

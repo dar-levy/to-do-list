@@ -47,8 +47,8 @@ export class ToDosComponent {
   }
 
   private updateLocalStorage(): void {
-    this.todos$.subscribe(todos => {
-      localStorage.setItem('tasks', JSON.stringify(todos));
+    this.todos$.subscribe(state => {
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     }).unsubscribe();
   }
 
