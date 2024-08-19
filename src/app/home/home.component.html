@@ -9,7 +9,7 @@
 
             <to-do-generator [newDescription]="newDescription" (addTask)="addTask($event)" />
 
-            <to-dos [tasks]="tasks" (deleteTask)="deleteTask($event)" (completeTask)="toggleTask($event)" (editTask)="editTask($event)"/>
+            <to-dos (editTask)="editTask($event)"/>
 
           </div>
         </div>
