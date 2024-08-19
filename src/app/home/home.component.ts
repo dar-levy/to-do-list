@@ -50,4 +50,22 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  completeTask(id: string) : void {
+    let task: Task | undefined = this.tasks.find(task => task.id == id);
+    if (task) {
+      task.isComplete = !task.isComplete;
+      this.tasks = this.tasks.filter(t => t.id !== id);
+
+      if (task.isComplete)
+        this.tasks.push(task);
+      else
+        this.tasks.unshift(task);
+
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+      // TODO: this.notificationService.success(`Task marked as ${task.isComplete ? 'complete' : 'incomplete'}!`);
+    } else {
+      // TODO: this.notificationService.alert("Failed to update task.");
+    }
+  }
+
 }
