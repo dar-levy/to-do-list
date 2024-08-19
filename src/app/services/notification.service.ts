@@ -20,4 +20,12 @@ export class NotificationService {
       backgroundColor: "green",
     }).showToast();
   }
+
+  error(description: string): void {
+    Toastify({
+      ...this.options,
+      text: description,
+      backgroundColor: "red",
+    }).showToast();
+  }
 }
