@@ -12,4 +12,9 @@ export class ToDosComponent {
   @Output() deleteTask = new EventEmitter<string>();
   @Output() completeTask = new EventEmitter<string>();
   @Output() editTask = new EventEmitter<string>();
+
+  onDeleteTask(taskId: string) {
+    this.deleteTask.emit(taskId);
+  }
+
 }
