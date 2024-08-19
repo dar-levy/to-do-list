@@ -2,6 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import { NgRedux, select } from 'ng2-redux';
+import {IAppState} from "../store";
+import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
+
 
 @Component({
   selector: 'to-dos',
@@ -18,17 +22,18 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './to-dos.component.css'
 })
 export class ToDosComponent {
-  @Input() tasks!: any;
-  @Output() deleteTask = new EventEmitter<string>();
-  @Output() completeTask = new EventEmitter<string>();
+  @select() todos: any;
   @Output() editTask = new EventEmitter<string>();
 
-  onDeleteTask(taskId: string) {
-    this.deleteTask.emit(taskId);
+  constructor(private ngRedux: NgRedux<IAppState>) {
   }
 
-  onCompleteTask(taskId: string) {
-    this.completeTask.emit(taskId);
+  toggleTodo(todoId: string): void {
+    this.ngRedux.dispatch({ type: TOGGLE_TODO, id: todoId });
+  }
+
+  removeTodo(todoId: string): void {
+    this.ngRedux.dispatch({ type: REMOVE_TODO, id: todoId });
   }
 
   onEditTask(taskId: string) : void {
@@ -36,6 +41,6 @@ export class ToDosComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
   }
 }
