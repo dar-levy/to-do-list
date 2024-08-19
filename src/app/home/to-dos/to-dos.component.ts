@@ -24,7 +24,6 @@ import { Task } from '../../models/task';
 })
 export class ToDosComponent {
   @select() todos: any;
-  @Output() editTask = new EventEmitter<string>();
 
   constructor(private ngRedux: NgRedux<IAppState>) {
   }

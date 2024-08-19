@@ -11,21 +11,21 @@
   <tr *ngIf="todos.length === 0">
     <td colspan="4" class="text-center"><p>No to dos!</p></td>
   </tr>
-  <tr *ngFor="let task of todos; index as i" cdkDrag>
+  <tr *ngFor="let todo of todos; index as i" cdkDrag>
     <th scope="row">{{ i + 1 }}</th>
-    <td [ngClass]="{'strikethrough': task.isComplete}">
-      <ng-container *ngIf="!task.isEditing; else editTemplate">
-        <span [ngClass]="{'completed': task.completed}">{{ task.description }}</span>
+    <td [ngClass]="{'strikethrough': todo.isComplete}">
+      <ng-container *ngIf="!todo.isEditing; else editTemplate">
+        <span [ngClass]="{'completed': todo.completed}">{{ todo.description }}</span>
       </ng-container>
       <ng-template #editTemplate>
-        <input [(ngModel)]="task.description" (keydown.enter)="editTodo(task.id, task.description)" />
+        <input [(ngModel)]="todo.description" (keydown.enter)="editTodo(todo)" />
       </ng-template>
     </td>
-    <td> {{ task.isComplete ? "Complete" : "In progress" }}</td>
+    <td> {{ todo.isComplete ? "Complete" : "In progress" }}</td>
     <td>
-      <button (click)="removeTodo(task.id)" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">Delete</button>
-      <button (click)="task.isEditing ? editTodo(task) : task.isEditing=!task.isEditing" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning ms-1">{{task.isEditing ? "Save" : "Edit" }}</button>
-      <button (click)="toggleTodo(task.id)" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">Complete</button>
+      <button (click)="removeTodo(todo.id)" data-mdb-button-init data-mdb-ripple-init class="btn btn-danger">Delete</button>
+      <button (click)="todo.isEditing ? editTodo(todo) : todo.isEditing=!todo.isEditing" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning ms-1">{{todo.isEditing ? "Save" : "Edit" }}</button>
+      <button (click)="toggleTodo(todo.id)" data-mdb-button-init data-mdb-ripple-init class="btn btn-success ms-1">Complete</button>
     </td>
   </tr>
   </tbody>
