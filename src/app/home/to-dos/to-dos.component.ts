@@ -21,4 +21,7 @@ export class ToDosComponent {
     this.completeTask.emit(taskId);
   }
 
+  onEditTask(taskId: string) : void {
+    this.editTask.emit(taskId);
+  }
 }
