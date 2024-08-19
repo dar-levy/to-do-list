@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { Store } from '@ngrx/store';
 import { ADD_TODO } from "../actions";
-import { IAppState } from "../store";
+import {IAppState} from "../../app.state";
 
 @Component({
   selector: 'to-do-generator',
