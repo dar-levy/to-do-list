@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
-import {NgClass} from "@angular/common";
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -9,7 +9,10 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CdkDropList,
     NgClass,
-    FormsModule
+    FormsModule,
+    NgIf,
+    NgForOf,
+    CdkDrag
   ],
   templateUrl: './to-dos.component.html',
   styleUrl: './to-dos.component.css'
