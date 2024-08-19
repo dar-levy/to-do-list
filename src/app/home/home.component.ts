@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-
 import { Task } from '../models/task';
+import {NotificationService} from "../services/notification.service";
+
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,9 @@ import { Task } from '../models/task';
 export class HomeComponent implements OnInit {
   tasks: Task[] = [];
   newDescription: string = '';
+
+  constructor(private notificationService: NotificationService) {
+  }
 
   ngOnInit(): void {
     let savedTasks = localStorage.getItem('tasks')
@@ -32,9 +36,9 @@ export class HomeComponent implements OnInit {
       this.tasks.unshift(newTask);
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
 
-      // TODO: this.notificationService.success("Task added successfully!");
+      this.notificationService.success("Task added successfully!");
     } else {
-      // TODO: this.notificationService.alert("Task description cannot be empty.");
+      this.notificationService.error("Task description cannot be empty.");
     }
   }
 
@@ -44,9 +48,9 @@ export class HomeComponent implements OnInit {
 
     if (this.tasks.length < originalLength) {
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      // TODO: this.notificationService.success("Task deleted successfully!");
+      this.notificationService.success("Task deleted successfully!");
     } else {
-      // TODO: this.notificationService.alert("Failed to delete task.");
+      this.notificationService.error("Failed to delete task.");
     }
   }
 
@@ -62,9 +66,9 @@ export class HomeComponent implements OnInit {
         this.tasks.unshift(task);
 
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
-      // TODO: this.notificationService.success(`Task marked as ${task.isComplete ? 'complete' : 'incomplete'}!`);
+      this.notificationService.success(`Task marked as ${task.isComplete ? 'complete' : 'incomplete'}!`);
     } else {
-      // TODO: this.notificationService.alert("Failed to update task.");
+      this.notificationService.error("Failed to update task.");
     }
   }
 
@@ -72,10 +76,10 @@ export class HomeComponent implements OnInit {
     let task: Task | undefined = this.tasks.find(task => task.id == id);
     if (task) {
       task.isEditing = !task.isEditing;
-      // TODO: this.notificationService.success("Task edited successfully!");
+      this.notificationService.success("Task edited successfully!");
     }
     else {
-      // TODO: this.notificationService.alert("Failed to edit task.");
+      this.notificationService.error("Failed to edit task.");
     }
   }
 
