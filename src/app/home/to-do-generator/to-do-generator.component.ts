@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import { NgRedux, select } from 'ng2-redux';
-import {ADD_TODO} from "../actions";
-import {IAppState} from "../store";
-
+import { Component } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { Store } from '@ngrx/store';
+import { ADD_TODO } from "../actions";
+import { IAppState } from "../store";
 
 @Component({
   selector: 'to-do-generator',
@@ -12,18 +11,17 @@ import {IAppState} from "../store";
     FormsModule
   ],
   templateUrl: './to-do-generator.component.html',
-  styleUrl: './to-do-generator.component.css'
+  styleUrls: ['./to-do-generator.component.css']
 })
 export class ToDoGeneratorComponent {
   newDescription: string = '';
 
-  constructor(private ngRedux: NgRedux<IAppState>) {
-  }
+  constructor(private store: Store<{ todos: IAppState }>) {}
 
   addTodo() {
     if (!this.newDescription) return;
 
-    this.ngRedux.dispatch({ type: ADD_TODO, description: this.newDescription });
+    this.store.dispatch(ADD_TODO({ description: this.newDescription }));
 
     this.newDescription = '';
   }

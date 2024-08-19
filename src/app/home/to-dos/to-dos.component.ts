@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import { NgRedux, select } from 'ng2-redux';
-import {IAppState} from "../store";
-import {REMOVE_TODO, TOGGLE_TODO} from "../actions";
+import { Component } from '@angular/core';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from "@angular/cdk/drag-drop";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Store, select } from '@ngrx/store';
+import {EDIT_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
 import { Task } from '../../models/task';
-
+import { Observable } from 'rxjs';
+import {IAppState} from "../store";
 
 @Component({
   selector: 'to-dos',
@@ -20,28 +20,32 @@ import { Task } from '../../models/task';
     CdkDrag
   ],
   templateUrl: './to-dos.component.html',
-  styleUrl: './to-dos.component.css'
+  styleUrls: ['./to-dos.component.css']
 })
 export class ToDosComponent {
-  @select() todos: any;
+  todos$: Observable<Task[]>;
 
-  constructor(private ngRedux: NgRedux<IAppState>) {
+  constructor(private store: Store<IAppState>) {
+    this.todos$ = this.store.pipe(select((state: IAppState) => state.todos));
   }
 
   toggleTodo(todoId: string): void {
-    this.ngRedux.dispatch({ type: TOGGLE_TODO, id: todoId });
+    this.store.dispatch(TOGGLE_TODO({ id: todoId }));
   }
 
   removeTodo(todoId: string): void {
-    this.ngRedux.dispatch({ type: REMOVE_TODO, id: todoId });
+    this.store.dispatch(REMOVE_TODO({ id: todoId }));
   }
 
   editTodo(todo: Task): void {
     todo.isEditing = !todo.isEditing;
-    this.ngRedux.dispatch({ type: TOGGLE_TODO, id: todo.id, description: todo.description });
+    this.store.dispatch(EDIT_TODO({ id: todo.id, description: todo.description }));
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<Task[]>): void {
+    this.todos$.subscribe(todos => {
+      const updatedTodos = [...todos];
+      moveItemInArray(updatedTodos, event.previousIndex, event.currentIndex);
+    }).unsubscribe();
   }
 }
