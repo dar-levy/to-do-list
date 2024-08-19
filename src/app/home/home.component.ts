@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
+
 import { Task } from '../models/task';
 
 @Component({
@@ -15,5 +17,24 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let savedTasks = localStorage.getItem('tasks')
     this.tasks = savedTasks ? JSON.parse(savedTasks) : []
+  }
+
+  addTask(newDescription: string) : void {
+    if (newDescription.trim().length) {
+      let newTask: Task = {
+        id: uuidv4(),
+        description: newDescription,
+        created_at: Date.now(),
+        isComplete: false,
+        isEditing: false
+      }
+
+      this.tasks.unshift(newTask);
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+      // TODO: this.notificationService.success("Task added successfully!");
+    } else {
+      // TODO: this.notificationService.alert("Task description cannot be empty.");
+    }
   }
 }
