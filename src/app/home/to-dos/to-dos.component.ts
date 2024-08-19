@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import {EDIT_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
 import { ToDo } from '../../models/to-do';
 import { Observable } from 'rxjs';
-import {IAppState} from "../store";
+import {IAppState} from "../../app.state";
 
 @Component({
   selector: 'to-dos',
