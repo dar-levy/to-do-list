@@ -81,7 +81,6 @@ export class HomeComponent implements OnInit {
     let task: Task | undefined = this.tasks.find(task => task.id == id);
     if (task) {
       task.isEditing = !task.isEditing;
-      this.notificationService.success("Task edited successfully!");
     }
     else {
       this.notificationService.error("Failed to edit task.");
