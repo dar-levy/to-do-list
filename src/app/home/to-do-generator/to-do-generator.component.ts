@@ -23,7 +23,7 @@ export class ToDoGeneratorComponent {
   addTodo() {
     if (!this.newDescription) return;
 
-    this.ngRedux.dispatch({ type: ADD_TODO, title: this.newDescription });
+    this.ngRedux.dispatch({ type: ADD_TODO, description: this.newDescription });
 
     this.newDescription = '';
   }

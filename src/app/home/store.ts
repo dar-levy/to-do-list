@@ -1,5 +1,7 @@
 import { tassign } from 'tassign';
 import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO } from './actions';
+import {Task} from "../models/task";
+import {v4 as uuidv4} from "uuid";
 
 export interface IAppState {
   todos: any[];
@@ -12,7 +14,13 @@ export const INITIAL_STATE: IAppState = {
 export function rootReducer(state: IAppState, action: any): IAppState {
   switch (action.type) {
     case ADD_TODO:
-      var newTodo = { id: state.todos.length + 1, title: action.title };
+      let newTodo: Task = {
+        id: uuidv4(),
+        description: action.description,
+        created_at: Date.now(),
+        isComplete: false,
+        isEditing: false
+      }
 
       return tassign(state, {
         todos: state.todos.concat(newTodo),
@@ -26,7 +34,7 @@ export function rootReducer(state: IAppState, action: any): IAppState {
       return tassign(state, {
         todos: [
           ...state.todos.slice(0, index),
-          tassign(todo, { isCompleted: !todo.isCompleted }),
+          tassign(todo, { isComplete: !todo.isComplete }),
           ...state.todos.slice(index + 1),
         ],
       });
