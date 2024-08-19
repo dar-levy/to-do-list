@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  completeTask(id: string) : void {
+  toggleTask(id: string) : void {
     let task: Task | undefined = this.tasks.find(task => task.id == id);
     if (task) {
       task.isComplete = !task.isComplete;
