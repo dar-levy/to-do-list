@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
       this.notificationService.success("Task added successfully!");
     } else {
-      // TODO: this.notificationService.alert("Task description cannot be empty.");
+      this.notificationService.error("Task description cannot be empty.");
     }
   }
 
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.notificationService.success("Task deleted successfully!");
     } else {
-      // TODO: this.notificationService.alert("Failed to delete task.");
+      this.notificationService.error("Failed to delete task.");
     }
   }
 
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       localStorage.setItem("tasks", JSON.stringify(this.tasks));
       this.notificationService.success(`Task marked as ${task.isComplete ? 'complete' : 'incomplete'}!`);
     } else {
-      // TODO: this.notificationService.alert("Failed to update task.");
+      this.notificationService.error("Failed to update task.");
     }
   }
 
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
       this.notificationService.success("Task edited successfully!");
     }
     else {
-      // TODO: this.notificationService.alert("Failed to edit task.");
+      this.notificationService.error("Failed to edit task.");
     }
   }
 
