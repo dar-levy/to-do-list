@@ -3,13 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../models/task';
 import {NotificationService} from "../services/notification.service";
 import {ToDosComponent} from "./to-dos/to-dos.component";
+import {ToDoGeneratorComponent} from "./to-do-generator/to-do-generator.component";
 
 
 @Component({
   selector: 'home',
   standalone: true,
   imports: [
-    ToDosComponent
+    ToDosComponent,
+    ToDoGeneratorComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
