@@ -17,4 +17,8 @@ export class ToDosComponent {
     this.deleteTask.emit(taskId);
   }
 
+  onCompleteTask(taskId: string) {
+    this.completeTask.emit(taskId);
+  }
+
 }
