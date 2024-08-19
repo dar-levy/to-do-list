@@ -4,7 +4,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import { NgRedux, select } from 'ng2-redux';
 import {IAppState} from "../store";
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "../actions";
+import {REMOVE_TODO, TOGGLE_TODO} from "../actions";
 
 
 @Component({
