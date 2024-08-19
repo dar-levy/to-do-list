@@ -7,8 +7,16 @@ export interface IAppState {
   todos: any[];
 }
 
+function loadTodosFromLocalStorage(): Task[] {
+  const todosJson = localStorage.getItem('todos');
+  if (todosJson) {
+    return JSON.parse(todosJson);
+  }
+  return [];
+}
+
 export const INITIAL_STATE: IAppState = {
-  todos: [],
+  todos: loadTodosFromLocalStorage(),
 }
 
 export function rootReducer(state: IAppState, action: any): IAppState {
