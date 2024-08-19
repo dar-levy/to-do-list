@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Task } from '../models/task';
 
 @Component({
@@ -8,7 +8,12 @@ import { Task } from '../models/task';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   tasks: Task[] = [];
   newDescription: string = '';
+
+  ngOnInit(): void {
+    let savedTasks = localStorage.getItem('tasks')
+    this.tasks = savedTasks ? JSON.parse(savedTasks) : []
+  }
 }
