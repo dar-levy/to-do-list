@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import { NgRedux, select } from 'ng2-redux';
 import {IAppState} from "../store";
 import {REMOVE_TODO, TOGGLE_TODO} from "../actions";
+import { Task } from '../../models/task';
 
 
 @Component({
@@ -36,8 +37,9 @@ export class ToDosComponent {
     this.ngRedux.dispatch({ type: REMOVE_TODO, id: todoId });
   }
 
-  onEditTask(taskId: string) : void {
-    this.editTask.emit(taskId);
+  editTodo(todo: Task): void {
+    todo.isEditing = !todo.isEditing;
+    this.ngRedux.dispatch({ type: TOGGLE_TODO, id: todo.id, description: todo.description });
   }
 
   drop(event: CdkDragDrop<string[]>) {
