@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-to-do-generator',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './to-do-generator.component.css'
 })
 export class ToDoGeneratorComponent {
-
+  @Input() newDescription: string = '';
+  @Output() addTask = new EventEmitter<string>();
 }
