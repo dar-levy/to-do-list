@@ -1,9 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-to-do-generator',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './to-do-generator.component.html',
   styleUrl: './to-do-generator.component.css'
 })
