@@ -68,4 +68,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  editTask(id: string) : void {
+    let task: Task | undefined = this.tasks.find(task => task.id == id);
+    if (task) {
+      task.isEditing = !task.isEditing;
+      // TODO: this.notificationService.success("Task edited successfully!");
+    }
+    else {
+      // TODO: this.notificationService.alert("Failed to edit task.");
+    }
+  }
+
 }
