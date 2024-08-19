@@ -2,12 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { Task } from '../models/task';
 import {NotificationService} from "../services/notification.service";
+import {ToDosComponent} from "./to-dos/to-dos.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [
+    ToDosComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
