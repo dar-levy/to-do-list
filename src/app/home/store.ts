@@ -1,10 +1,10 @@
 import { tassign } from 'tassign';
-import {ADD_TODO, TOGGLE_TODO, REMOVE_TODO, EDIT_TODO} from './actions';
-import {Task} from "../models/task";
-import {v4 as uuidv4} from "uuid";
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, EDIT_TODO } from './actions';
+import { Task } from "../models/task";
+import { v4 as uuidv4 } from "uuid";
 
 export interface IAppState {
-  todos: any[];
+  todos: Task[];
 }
 
 function loadTodosFromLocalStorage(): Task[] {
@@ -19,7 +19,7 @@ export const INITIAL_STATE: IAppState = {
   todos: loadTodosFromLocalStorage(),
 }
 
-export function rootReducer(state: IAppState, action: any): IAppState {
+export function rootReducer(state: IAppState = INITIAL_STATE, action: any): IAppState {
   switch (action.type) {
     case ADD_TODO:
       let newTodo: Task = {
@@ -28,14 +28,15 @@ export function rootReducer(state: IAppState, action: any): IAppState {
         created_at: Date.now(),
         isComplete: false,
         isEditing: false
-      }
+      };
 
       return tassign(state, {
         todos: state.todos.concat(newTodo),
       });
 
     case TOGGLE_TODO:
-      var todo = state.todos.find(t => t.id === action.id);
+      var todo : Task | undefined = state.todos.find((t: Task) => t.id === action.id);
+      if (!todo) return state;
 
       var index = state.todos.indexOf(todo);
 
@@ -48,7 +49,8 @@ export function rootReducer(state: IAppState, action: any): IAppState {
       });
 
     case EDIT_TODO:
-      var todo = state.todos.find(t => t.id === action.id);
+      var todo = state.todos.find((t: Task) => t.id === action.id);
+      if (!todo) return state;
 
       var index = state.todos.indexOf(todo);
 
@@ -62,9 +64,10 @@ export function rootReducer(state: IAppState, action: any): IAppState {
 
     case REMOVE_TODO:
       return tassign(state, {
-        todos: state.todos.filter(t => t.id !== action.id),
+        todos: state.todos.filter((t: Task) => t.id !== action.id),
       });
-  }
 
-  return state;
+    default:
+      return state;
+  }
 }
